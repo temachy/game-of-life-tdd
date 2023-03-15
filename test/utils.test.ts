@@ -18,4 +18,41 @@ describe('grid', () => {
       expect(flattenedResult.includes(0)).to.equal(true);
     });
   });
+  describe('countNeighborCells', () => {
+    it('should return 3 for grid[1][1]', () => {
+      const grid = [
+        [1, 0, 0, 0],
+        [0, 1, 1, 0],
+        [1, 0, 0, 1],
+        [0, 0, 1, 0],
+      ];
+
+      const result = countNeighborCells(grid, 1, 1);
+      expect(result).to.equal(3);
+    });
+
+    it('should return 0 for grid[2][2]', () => {
+      const grid = [
+        [1, 0, 0, 1],
+        [0, 0, 0, 0],
+        [1, 0, 0, 0],
+        [1, 0, 0, 0],
+      ];
+
+      const result = countNeighborCells(grid, 2, 2);
+      expect(result).to.equal(0);
+    });
+
+    it('should return 5 for grid[1][1]', () => {
+      const grid = [
+        [1, 1, 0, 1],
+        [1, 1, 1, 0],
+        [1, 0, 0, 0],
+        [1, 0, 0, 0],
+      ];
+
+      const result = countNeighborCells(grid, 1, 1);
+      expect(result).to.equal(5);
+    });
+  });
 });
