@@ -1,3 +1,5 @@
+import { countNeighborCells } from './countNeighbors';
+
 export const generateGrid = (columns: number, rows: number) => {
   const grid = Array(columns)
     .fill(null)
@@ -10,18 +12,15 @@ export const generateGrid = (columns: number, rows: number) => {
   return grid;
 };
 
-export const countNeighborCells = (
-  grid: number[][],
-  rowIndex: number,
-  columnIndex: number
-) => {
-  const topNeighbors = grid[rowIndex - 1]
-    .slice(columnIndex - 1, columnIndex + 1)
-    .reduce((accum, cell) => accum + cell, 0);
-  const bottomNeighbors = grid[rowIndex + 1]
-    .slice(columnIndex - 1, columnIndex + 1)
-    .reduce((accum, cell) => accum + cell, 0);
-  const sidesNeighbors =
-    grid[rowIndex][columnIndex + 1] + grid[rowIndex][columnIndex - 1];
-  return topNeighbors + bottomNeighbors + sidesNeighbors;
-};
+export const makeNewGeneration = (grid: number[][]) =>
+  grid.map((row, rowIndex) =>
+    row.map((cell, columnIndex) => {
+      const neighborsQuantity = countNeighborCells(grid, rowIndex, columnIndex);
+
+      if (neighborsQuantity < 2) {
+        return 0;
+      }
+
+      return cell;
+    })
+  );

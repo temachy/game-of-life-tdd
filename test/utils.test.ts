@@ -1,6 +1,6 @@
 import { expect } from '@open-wc/testing';
 import { countNeighborCells } from '../src/utils/countNeighbors';
-import { generateGrid } from '../src/utils/grid';
+import { generateGrid, makeNewGeneration } from '../src/utils/grid';
 
 describe('grid', () => {
   describe('generateGrid', () => {
@@ -12,13 +12,50 @@ describe('grid', () => {
       expect(result.length).to.equal(10);
       expect(flattenedResult.length).to.equal(100);
     });
-    console.log(flattenedResult);
 
     it('should fill 2d array with 0 or 1', () => {
       expect(flattenedResult.includes(1)).to.equal(true);
       expect(flattenedResult.includes(0)).to.equal(true);
     });
   });
+
+  describe('makeNewGeneration', () => {
+    it('live cell dies if it has fewer than two live neighbors', () => {
+      const grid1 = [
+        [1, 0, 0, 0],
+        [1, 1, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 1, 1],
+      ];
+
+      const expectedGrid1 = [
+        [1, 0, 0, 0],
+        [1, 1, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 1],
+      ];
+
+      const grid2 = [
+        [0, 0, 0, 0],
+        [0, 1, 0, 0],
+        [0, 0, 1, 0],
+        [1, 0, 1, 1],
+      ];
+
+      const expectedGrid2 = [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 1, 0],
+        [0, 0, 1, 1],
+      ];
+
+      const result1 = makeNewGeneration(grid1);
+      const result2 = makeNewGeneration(grid2);
+      expect(result1).to.deep.equal(expectedGrid1);
+      expect(result2).to.deep.equal(expectedGrid2);
+    });
+  });
+
   describe('countNeighborCells', () => {
     it('should return 3 for grid[1][1]', () => {
       const grid = [
