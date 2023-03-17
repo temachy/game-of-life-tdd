@@ -1,4 +1,5 @@
 import { expect } from '@open-wc/testing';
+import { countNeighborCells } from '../src/utils/countNeighbors';
 import { generateGrid } from '../src/utils/grid';
 
 describe('grid', () => {
@@ -53,6 +54,54 @@ describe('grid', () => {
 
       const result = countNeighborCells(grid, 1, 1);
       expect(result).to.equal(5);
+    });
+
+    it('should count neighbors across top edge, and return 4 for grid[0][2]', () => {
+      const grid = [
+        [1, 0, 0, 1],
+        [1, 1, 1, 0],
+        [1, 0, 0, 0],
+        [1, 0, 1, 0],
+      ];
+
+      const result = countNeighborCells(grid, 0, 2);
+      expect(result).to.equal(4);
+    });
+
+    it('should count neighbors across bottom edge, and return 4 for grid[3][2]', () => {
+      const grid = [
+        [1, 0, 1, 1],
+        [0, 0, 1, 1],
+        [1, 0, 0, 1],
+        [0, 1, 1, 0],
+      ];
+
+      const result = countNeighborCells(grid, 3, 2);
+      expect(result).to.equal(4);
+    });
+
+    it('should count neighbors across left edge, and return 2 for grid[2][0]', () => {
+      const grid = [
+        [1, 0, 0, 1],
+        [0, 0, 1, 1],
+        [1, 0, 0, 1],
+        [0, 0, 1, 0],
+      ];
+
+      const result = countNeighborCells(grid, 2, 0);
+      expect(result).to.equal(2);
+    });
+
+    it('should count neighbors across right edge, and return 3 for grid[1][3]', () => {
+      const grid = [
+        [1, 0, 0, 0],
+        [0, 0, 0, 1],
+        [1, 0, 0, 1],
+        [0, 0, 1, 0],
+      ];
+
+      const result = countNeighborCells(grid, 1, 3);
+      expect(result).to.equal(3);
     });
   });
 });
