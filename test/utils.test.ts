@@ -22,17 +22,19 @@ describe('grid', () => {
   describe('makeNewGeneration', () => {
     it('live cell dies if it has fewer than two live neighbors', () => {
       const grid1 = [
-        [1, 0, 0, 0],
-        [1, 1, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 1, 1],
+        [0, 1, 0, 0, 0],
+        [1, 0, 0, 1, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0],
       ];
 
       const expectedGrid1 = [
-        [1, 0, 0, 0],
-        [1, 1, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 1],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
       ];
 
       const grid2 = [
@@ -43,10 +45,10 @@ describe('grid', () => {
       ];
 
       const expectedGrid2 = [
+        [1, 1, 1, 1],
         [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 1, 0],
-        [0, 0, 1, 1],
+        [1, 0, 1, 0],
+        [0, 1, 1, 1],
       ];
 
       const result1 = makeNewGeneration(grid1);
@@ -57,31 +59,70 @@ describe('grid', () => {
 
     it('live cell with more than three live neighbors dies', () => {
       const grid1 = [
-        [0, 0, 1, 0],
-        [0, 1, 1, 0],
-        [0, 1, 1, 0],
-        [0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 1, 1, 0, 0],
+        [0, 1, 1, 0, 0],
+        [0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0],
       ];
 
       const expectedGrid1 = [
+        [0, 0, 0, 0, 0],
+        [0, 1, 1, 0, 0],
+        [0, 0, 0, 1, 0],
+        [0, 1, 1, 0, 0],
+        [0, 0, 0, 0, 0],
+      ];
+
+      const grid2 = [
+        [0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0],
+        [0, 1, 1, 0, 0],
+        [0, 1, 1, 1, 0],
+        [0, 0, 0, 0, 0],
+      ];
+
+      const expectedGrid2 = [
+        [0, 0, 0, 0, 0],
+        [0, 1, 1, 0, 0],
+        [1, 0, 0, 1, 0],
+        [0, 1, 0, 1, 0],
+        [0, 0, 1, 0, 0],
+      ];
+
+      const result1 = makeNewGeneration(grid1);
+      const result2 = makeNewGeneration(grid2);
+      expect(result1).to.deep.equal(expectedGrid1);
+      expect(result2).to.deep.equal(expectedGrid2);
+    });
+
+    it('dead cell with three live neighbors springs to life', () => {
+      const grid1 = [
+        [0, 0, 0, 0],
+        [0, 1, 0, 0],
+        [0, 1, 1, 1],
         [0, 0, 1, 0],
+      ];
+
+      const expectedGrid1 = [
         [0, 0, 0, 0],
-        [0, 1, 1, 0],
-        [0, 0, 0, 0],
+        [1, 1, 0, 0],
+        [1, 1, 0, 1],
+        [0, 1, 1, 1],
       ];
 
       const grid2 = [
         [0, 0, 0, 0],
-        [0, 1, 0, 0],
-        [1, 1, 1, 0],
-        [1, 1, 1, 1],
+        [0, 1, 1, 1],
+        [1, 0, 1, 0],
+        [1, 1, 0, 1],
       ];
 
       const expectedGrid2 = [
         [0, 0, 0, 0],
-        [0, 1, 0, 0],
+        [1, 1, 1, 1],
         [0, 0, 0, 0],
-        [0, 0, 0, 0],
+        [1, 1, 1, 1],
       ];
 
       const result1 = makeNewGeneration(grid1);

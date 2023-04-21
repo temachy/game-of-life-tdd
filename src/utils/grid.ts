@@ -22,6 +22,10 @@ const isCellAlive = (
     return 0;
       }
 
+  if (neighborsQuantity === 3) {
+      return 1;
+  }
+
   return grid[rowIndex][columnIndex];
 };
 
