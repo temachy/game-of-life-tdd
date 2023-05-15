@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import Grid from './grid';
+import Grid from './pixiGridImplementation';
 
 @customElement('pixi-grid')
 export class PixiGrid extends LitElement {
