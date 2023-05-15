@@ -3,8 +3,8 @@ import { customElement, property } from 'lit/decorators.js';
 import '../Cell/grid-cell';
 import { generateGrid, makeNewGeneration } from '../../utils/grid';
 
-@customElement('dom-grid-implementation')
-export class DOMGridImplementation extends LitElement {
+@customElement('dom-grid')
+export class DOMGrid extends LitElement {
   @property()
   grid: number[][] = generateGrid(80, 100);
   updateInterval: NodeJS.Timer | undefined;

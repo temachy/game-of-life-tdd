@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import './components/DOMGridImplementation/dom-grid-implementation';
+import './components/DOMGrid/dom-grid';
 @customElement('game-of-life-tdd')
 export class GameOfLifeTdd extends LitElement {
   static styles = css`
@@ -15,7 +15,7 @@ export class GameOfLifeTdd extends LitElement {
 
   render() {
     return html`<main>
-      <dom-grid-implementation></dom-grid-implementation>
+      <dom-grid></dom-grid>
     </main> `;
   }
 }
